@@ -1,5 +1,5 @@
 .terraform
 *.tfastate
 *.tfastate.backup
-key.gitinore
+key.json
 .terraform.lock.hcl
