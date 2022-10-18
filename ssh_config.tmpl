@@ -1,0 +1,16 @@
+Host bastion
+	Hostname ${jumpserver_ip}
+	User ubuntu
+	IdentityFile C:\Users\User\.ssh\KEVIN2
+
+Host web01
+	Hostname ${web01_private_ip}
+	User ubuntu
+	IdentityFile C:\Users\User\.ssh\KEVIN2
+	ProxyCommand ssh.exe bastion -W %h:%p
+
+Host web01
+	Hostname ${web02_private_ip}
+	User ubuntu
+	IdentityFile C:\Users\User\.ssh\KEVIN2
+	ProxyCommand ssh.exe bastion -W %h:%p
