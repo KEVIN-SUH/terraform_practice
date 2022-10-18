@@ -2,3 +2,4 @@
 *.tfastate
 *.tfastate.backup
 key.gitinore
+.terraform.lock.hcl
