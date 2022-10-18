@@ -20,7 +20,7 @@ resource "aws_instance" "webserver2" {
     subnet_id = aws_subnet.private2.id
 
     tags = {
-      Name = "webserver1"
+      Name = "webserver2"
     }
     vpc_security_group_ids = [ "${aws_security_group.smaple_default.id}"]
     root_block_device {
