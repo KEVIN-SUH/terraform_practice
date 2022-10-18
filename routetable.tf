@@ -20,7 +20,7 @@ resource "aws_route_table" "private1" {
     vpc_id = aws_vpc.sample-vpc.id
     route {
         cidr_block = "0.0.0.0/0"
-        gateway_id = aws_eip.eip_nat1.id
+        gateway_id = aws_nat_gateway.nat1.id
     }
     tags = {
       Name = "routetable_public1"
@@ -30,7 +30,7 @@ resource "aws_route_table" "private2" {
     vpc_id = aws_vpc.sample-vpc.id
     route {
         cidr_block = "0.0.0.0/0"
-        gateway_id = aws_eip.eip_nat2.id
+        gateway_id = aws_nat_gateway.nat2.id
     }
     tags = {
       Name = "routetable_public1"
