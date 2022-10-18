@@ -1,3 +1,4 @@
 .terraform
 *.tfastate
 *.tfastate.backup
+key.gitinore
