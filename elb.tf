@@ -3,7 +3,7 @@ resource "aws_alb" "sample_alb" {
     internal = false
     load_balancer_type="application"
     ip_address_type="ipv4"
-    security_groups=["${aws_security_group.smaple_default.id},${aws_security_group.elb_server.id}"]
+    security_groups=["${aws_security_group.smaple_default.id}","${aws_security_group.elb_server.id}"]
     subnets = [ aws_subnet.public1.id,aws_subnet.public2.id ]
     tags = {
       Name = "sample_alb"
@@ -19,6 +19,13 @@ resource "aws_alb_target_group" "sample_alb_targetgroup" {
       Name = "personal-alb-targetgroup"
     }
     protocol_version = "HTTP1"
+    health_check {
+        healthy_threshold = 2
+        unhealthy_threshold = 2
+        interval = 30
+        timeout = 3
+
+    }
 
 }
 resource "aws_alb_target_group_attachment" "alb_target_web01" {

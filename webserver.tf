@@ -12,7 +12,7 @@ resource "aws_instance" "webserver1" {
       volume_size =8
       volume_type="gp2"
     }
-    user_data = "${file("webserver1_appach.sh")}"
+    user_data = file("./webserver1_appach.sh")
 }
 resource "aws_instance" "webserver2" {
     ami = "ami-068a0feb96796b48d"
@@ -28,5 +28,5 @@ resource "aws_instance" "webserver2" {
       volume_size =8
       volume_type="gp2"
     }
-    user_data = "${file("webserver2_appach.sh")}"
+    user_data = file("./webserver2_appach.sh")
 }
