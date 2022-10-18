@@ -3,7 +3,7 @@ resource "aws_instance" "webserver1" {
     instance_type = "t2.micro"
     associate_public_ip_address = false
     subnet_id = aws_subnet.private1.id
-
+    key_name = aws_key_pair.key.key_name
     tags = {
       Name = "webserver1"
     }
@@ -18,7 +18,7 @@ resource "aws_instance" "webserver2" {
     instance_type = "t2.micro"
     associate_public_ip_address = false
     subnet_id = aws_subnet.private2.id
-
+    key_name = aws_key_pair.key.key_name
     tags = {
       Name = "webserver2"
     }
