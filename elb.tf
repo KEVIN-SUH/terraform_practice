@@ -1,4 +1,4 @@
-resource "aws_alb" "sample_alb" {
+resource "aws_lb" "sample_alb" {
     name = "personal-sample-alb"
     internal = false
     load_balancer_type="application"
@@ -8,10 +8,12 @@ resource "aws_alb" "sample_alb" {
     tags = {
       Name = "sample_alb"
     }
+    
 }
-resource "aws_alb_target_group" "sample_alb_targetgroup" {
+resource "aws_lb_target_group" "sample_alb_targetgroup" {
+    
     name = "personal-alb-targetgroup"
-    target_type = "instance"
+    #target_type = "instance"
     port = 3000
     protocol = "HTTP"
     vpc_id = aws_vpc.sample-vpc.id
@@ -20,31 +22,33 @@ resource "aws_alb_target_group" "sample_alb_targetgroup" {
     }
     protocol_version = "HTTP1"
     health_check {
+      protocol = "HTTP"
         healthy_threshold = 2
         unhealthy_threshold = 2
-        interval = 30
+        interval = 10
         timeout = 3
+        path = "/"
 
     }
 
 }
-resource "aws_alb_target_group_attachment" "alb_target_web01" {
-    target_group_arn = aws_alb_target_group.sample_alb_targetgroup.arn
+resource "aws_lb_target_group_attachment" "alb_target_web01" {
+    target_group_arn = aws_lb_target_group.sample_alb_targetgroup.arn
     target_id = aws_instance.webserver1.id
-    port = 80
+    port = 3000
 }
-resource "aws_alb_target_group_attachment" "alb_target_web02" {
-    target_group_arn = aws_alb_target_group.sample_alb_targetgroup.arn
+resource "aws_lb_target_group_attachment" "alb_target_web02" {
+    target_group_arn = aws_lb_target_group.sample_alb_targetgroup.arn
     target_id = aws_instance.webserver2.id
-    port = 80
+    port = 3000
 }
-resource "aws_alb_listener" "personal_alb_listner" {
-    load_balancer_arn = aws_alb.sample_alb.arn
+resource "aws_lb_listener" "personal_alb_listner" {
+    load_balancer_arn = aws_lb.sample_alb.arn
     port = 80
     protocol = "HTTP"
     default_action {
       type = "forward"
-      target_group_arn = aws_alb_target_group.sample_alb_targetgroup.arn
+      target_group_arn = aws_lb_target_group.sample_alb_targetgroup.arn
     }
   
 }
