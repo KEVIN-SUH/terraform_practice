@@ -3,5 +3,5 @@
 *.tfastate.backup
 key.json
 .terraform.lock.hcl
-database/.terraform
-database/.terraform.lock.hcl
+/database/.terraform
+/database/.terraform.lock.hcl
